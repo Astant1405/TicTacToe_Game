@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Таблица лидеров</title>
+</head>
+<body>
+
+
+
+<a th:href="@{/table}" class="btn">Назад к вводу</a>
+
+<h1>Таблица лидеров</h1>
+
+<div th:if="${leaderBoard == null}">
+    <p>Нет данных для отображения</p>
+</div>
+
+<div th:unless="${leaderBoard == null}">
+    <table>
+        <thead>
+        <tr>
+            <th>Место</th>
+            <th>Игрок</th>
+            <th>Победы</th>
+            <th>Поражения</th>
+            <th>Ничьи</th>
+            <th>Процент побед</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="player, iter : ${leaderBoard}">
+            <td th:text="${iter.index + 1}">1</td>
+            <td th:text="${player.username}">Username</td>
+            <td th:text="${player.wins}">0</td>
+            <td th:text="${player.losses}">0</td>
+            <td th:text="${player.draws}">0</td>
+            <td th:text="${#numbers.formatDecimal(player.winRatio, 1, 2)} + '%'">0%</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

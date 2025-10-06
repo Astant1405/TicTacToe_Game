@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+Добро пожаловать в игру крестики-нолики!
+
+
+Выберите режим игры
+
+<form th:action="@{/game/create/offline}" th:method="POST">
+    <input type="submit" value="Начать новую игру в одиночку" />
+</form>
+<br/>
+
+<form th:action="@{/game/create/online}" th:method="POST">
+    <input type="submit" value="Создать игру для двоих" />
+</form>
+
+<form th:action="@{/game/join}" th:method="POST">
+    <input type="submit" value="Присоединиться к игре" />
+</form>
+
+<form th:action="@{/info}" th:method="GET">
+    <input type="submit" value="Посмотреть информацию про игрока">
+</form>
+
+<form th:action="@{/table}" th:method="GET">
+    <input type="submit" value="Посмотреть список лидеров">
+</form>
+
+<form th:action="@{/logout}" th:method="POST">
+    <input type="submit" value="Выйти из аккаунта">
+</form>
+</body>
+</html>

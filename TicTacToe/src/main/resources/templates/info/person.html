@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Person info</title>
+</head>
+<body>
+
+<div>
+    <h2>ID: <span th:text="${person?.id} ?: 'Не указан'"></span></h2>
+    <h3>Имя: <span th:text="${person?.username} ?: 'Не указано'"></span></h3>
+
+    <div th:if="${completeGames != null and not completeGames.isEmpty()}">
+        <h3>Завершенные игры:</h3>
+        <table class="games-table">
+            <thead>
+            <tr>
+                <th>ID игры</th>
+                <th>Игрок 1</th>
+                <th>Игрок 2</th>
+                <th>Статус</th>
+                <th>Дата создания</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="game : ${completeGames}">
+                <td th:text="${game?.id} ?: 'N/A'">ID игры</td>
+                <td th:text="${game?.firstPerson?.username} ?: 'Неизвестен'">Игрок 1</td>
+                <td th:text="${game?.secondPerson?.username} ?: 'Компьютер'">Игрок 2</td>
+                <td th:text="${game?.status} ?: 'Неизвестен'">Статус</td>
+                <td th:text="${game?.timeOfCreate != null} ?
+                    ${#temporals.format(game.timeOfCreate, 'dd.MM.yyyy HH:mm')} :
+                    'Не указана'">Дата</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div th:if="${completeGames == null or completeGames.isEmpty()}">
+        <p>Нет завершенных игр</p>
+    </div>
+</div>
+
+<a th:href="@{/info}">Назад к поиску</a>
+
+</body>
+</html>

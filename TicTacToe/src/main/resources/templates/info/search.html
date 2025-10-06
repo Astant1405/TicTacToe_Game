@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Поиск игрока</title>
+</head>
+<body>
+
+<div th:if="${error != null}" style="color: red;">
+    <span th:text="${error}"></span>
+</div>
+
+<form th:action="@{/info}" method="POST">
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+    <label>Введите ID игрока:
+        <input type="text" name="id">
+    </label>
+    <input type="submit" value="Найти">
+</form>
+
+</body>
+</html>

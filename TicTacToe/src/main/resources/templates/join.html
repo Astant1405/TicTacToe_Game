@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Join game</title>
+</head>
+<body>
+
+<h1>Присоединиться к игре</h1>
+
+<form th:action="@{/game/connect}" method="POST" th:object="${joinGameDTO}">
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+    <label for="gameId">Введите ID игры: </label>
+    <input type="text" th:field="*{gameId}" id="gameId">
+    <div th:if="${#fields.hasErrors('gameId')}" style="color: red;">
+        <span th:each="error : ${#fields.errors('gameId')}" th:text="${error}"></span>
+    </div>
+    <br>
+    <input type="submit" value="Присоединиться к игре">
+</form>
+
+<br>
+<a th:href="@{/game/home}">Вернуться на главную</a>
+
+</body>
+</html>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Результат игры</title>
+</head>
+<body>
+<h1>Результат игры</h1>
+
+<div th:if="${game.status.contains('Победил игрок')}">
+    <div th:if="${game.status.contains(game.firstPerson.username)}">
+        <p th:if="${currentUserId == game.firstPerson.id}">
+            Вы победили!
+        </p>
+        <p th:if="${currentUserId == game.secondPerson.id}">
+            Вы проиграли. Победил: <span th:text="${game.firstPerson.username}"></span>
+        </p>
+    </div>
+
+    <div th:if="${game.status.contains(game.secondPerson.username)}">
+        <p th:if="${currentUserId == game.secondPerson.id}">
+            Вы победили!
+        </p>
+        <p th:if="${currentUserId == game.firstPerson.id}">
+            Вы проиграли. Победил: <span th:text="${game.secondPerson.username}"></span>
+        </p>
+    </div>
+</div>
+
+<div th:if="${game.status == 'Компьютер'}">
+    <p th:if="${currentUserId == game.firstPerson.id}">
+        Вы проиграли. Победил компьютер.
+    </p>
+    <p th:if="${currentUserId != game.firstPerson.id}">
+        Победил компьютер.
+    </p>
+</div>
+
+<div th:if="${game.status == 'Ничья'}">
+        Ничья!
+</div>
+
+
+<br>
+<a th:href="@{/game/home}">Вернуться на главную</a>
+
+</body>
+</html>
